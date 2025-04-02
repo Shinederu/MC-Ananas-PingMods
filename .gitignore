@@ -35,6 +35,7 @@ wrapper/dists/
 
 # === Output jars (optionnel) ===
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 # === Node/npm (si jamais tu fais du frontend dedans) ===
 node_modules/
