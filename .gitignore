@@ -1,0 +1,43 @@
+# === Gradle build ===
+.gradle/
+build/
+out/
+tmp/
+caches/
+daemon/
+
+# === IDE config ===
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.class
+
+# === Minecraft dev runtime ===
+run/
+logs/
+eula.txt
+server.properties
+
+# === System files ===
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.orig
+
+# === Gradle wrapper caches ===
+wrapper/dists/
+
+# === Output jars (optionnel) ===
+*.jar
+
+# === Node/npm (si jamais tu fais du frontend dedans) ===
+node_modules/
+
+# === Keep GitHub actions or workflows ===
+!.github/
