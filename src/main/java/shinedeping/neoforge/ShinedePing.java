@@ -44,7 +44,6 @@ import java.net.URL;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ShinedePing.MODID)
 public class ShinedePing {
@@ -130,6 +129,7 @@ public class ShinedePing {
         envoyerPing();
     }
 
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
@@ -141,10 +141,10 @@ public class ShinedePing {
         }
     }
 
-    private void envoyerPing() {
+        private void envoyerPing() {
         new Thread(() -> {
             try {
-                String urlStr = "http://172.16.20.11:85/server/server-off";
+                String urlStr = "https://api.play.shinederu.lol/server/server-off";
                 URL url = new URL(urlStr);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");

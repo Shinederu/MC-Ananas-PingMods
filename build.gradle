@@ -154,11 +154,10 @@ publishing {
     }
     repositories {
         maven {
-            url = uri(project.layout.projectDirectory.dir("repo"))
+            url "file://${project.projectDir}/repo"
         }
     }
 }
-
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
