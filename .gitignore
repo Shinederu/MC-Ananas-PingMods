@@ -1,44 +1,26 @@
-# === Gradle build ===
-.gradle/
-build/
-out/
-tmp/
-caches/
-daemon/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
-# === IDE config ===
-.idea/
-.vscode/
-*.iml
+# idea
+out
 *.ipr
 *.iws
-*.class
+*.iml
+.idea
 
-# === Minecraft dev runtime ===
-run/
-logs/
-eula.txt
-server.properties
+# gradle
+build
+.gradle
 
-# === System files ===
-.DS_Store
-Thumbs.db
-*.log
-*.tmp
-*.bak
-*.swp
-*.swo
-*.orig
+# other
+eclipse
+run
+runs
+run-data
 
-# === Gradle wrapper caches ===
-wrapper/dists/
-
-# === Output jars (optionnel) ===
-*.jar
-!gradle/wrapper/gradle-wrapper.jar
-
-# === Node/npm (si jamais tu fais du frontend dedans) ===
-node_modules/
-
-# === Keep GitHub actions or workflows ===
-!.github/
+repo

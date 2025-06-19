@@ -1,0 +1,13 @@
+{
+  "itemGroup.shinedeping": "Example Mod Tab",
+  "block.shinedeping.example_block": "Example Block",
+  "item.shinedeping.example_item": "Example Item",
+
+  "shinedeping.configuration.title": "ShinedePing Configs",
+  "shinedeping.configuration.section.shinedeping.common.toml": "ShinedePing Configs",
+  "shinedeping.configuration.section.shinedeping.common.toml.title": "ShinedePing Configs",
+  "shinedeping.configuration.items": "Item List",
+  "shinedeping.configuration.logDirtBlock": "Log Dirt Block",
+  "shinedeping.configuration.magicNumberIntroduction": "Magic Number Text",
+  "shinedeping.configuration.magicNumber": "Magic Number"
+}

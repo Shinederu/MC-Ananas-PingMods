@@ -1,61 +1,25 @@
-# 🧱 Shinederu PingMod
 
-![Build](https://img.shields.io/github/actions/workflow/status/Shinederu/MC-Ananas-PingMods/build.yml?branch=main)
-![Minecraft](https://img.shields.io/badge/minecraft-1.20.1-blue?style=flat-square)
-![License](https://img.shields.io/github/license/Shinederu/MC-Ananas-PingMods)
+Installation information
+=======
 
----
+This template repository can be directly cloned to get you started with a new
+mod. Simply create a new repository cloned from this one, by following the
+instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
-## ✨ Description
+Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
 
-> Petit mod Fabric qui envoie une requête HTTP vers une API dès que le serveur Minecraft est entièrement démarré.
-> Parfait pour synchroniser des services externes, ping un dashboard web, ou faire des easter eggs 😄
+If at any point you are missing libraries in your IDE, or you've run into problems you can
+run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
+{this does not affect your code} and then start the process again.
 
----
+Mapping Names:
+============
+By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
+in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
+license. For the latest license text, refer to the mapping file itself, or the reference copy here:
+https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
 
-## ⚙️ Fonctionnement
-
-Dès que le serveur est **complètement lancé**, le mod envoie une requête GET vers :
-
-```
-https://api.play.shinederu.lol/server/serveroff
-```
-
-- Si l’API répond avec succès (code HTTP 200), le message retourné est affiché dans la console.
-- En cas d’erreur (4xx / 5xx) ou de timeout, un message clair est aussi affiché.
-
----
-
-## 🧹 Installation
-
-1. Télécharge [`fabric-api`](https://modrinth.com/mod/fabric-api) pour Minecraft `1.20.1`
-2. Glisse ce mod (`shinederu_pingmod-x.x.x.jar`) dans le dossier `mods/`
-3. Démarre ton serveur Fabric !
-
----
-
-## 🔧 Compilation locale
-
-```bash
-./gradlew build
-```
-
-Le fichier sera généré dans `build/libs/`.
-
----
-
-## 📆 API pingée
-
-Tu peux consulter ou tester l’API appelée ici :  
-[https://api.play.shinederu.lol/server/serveroff](https://api.play.shinederu.lol/server/serveroff)
-
----
-
-## 📜 Licence
-
-Ce projet est sous licence **MIT** — fais-en ce que tu veux, mais pense à créditer 💙
-
----
-
-*Made with 🍍 by Shinederu*
-
+Additional Resources: 
+==========
+Community Documentation: https://docs.neoforged.net/  
+NeoForged Discord: https://discord.neoforged.net/
