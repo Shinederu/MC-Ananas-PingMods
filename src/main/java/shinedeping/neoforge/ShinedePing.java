@@ -34,6 +34,17 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ShinedePing.MODID)
 public class ShinedePing {
@@ -115,7 +126,8 @@ public class ShinedePing {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("[ShinedePing] Le serveur a démarré !");
+        envoyerPing();
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -127,5 +139,64 @@ public class ShinedePing {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
+    }
+
+    private void envoyerPing() {
+        new Thread(() -> {
+            try {
+                String urlStr = "http://172.16.20.11:85/server/server-off";
+                URL url = new URL(urlStr);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setConnectTimeout(5000); // 5 sec timeout
+                connection.setReadTimeout(5000);
+
+                int code = connection.getResponseCode();
+                InputStreamReader streamReader;
+
+                if (code >= 200 && code < 300) {
+                    streamReader = new InputStreamReader(connection.getInputStream());
+                } else {
+                    streamReader = new InputStreamReader(connection.getErrorStream());
+                }
+
+                BufferedReader reader = new BufferedReader(streamReader);
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                reader.close();
+
+                String response = responseBuilder.toString();
+                LOGGER.info("[ShinederuPingMod] Réponse brute : " + response);
+
+                if (response.trim().startsWith("{") && response.trim().endsWith("}")) {
+                    try {
+                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+                        String message = json.has("message") ? json.get("message").getAsString() : "Aucun message.";
+
+                        if (code == 200) {
+                            LOGGER.info("[ShinederuPingMod] ✅ Code HTTP 200 - Message du serveur : " + message);
+                        } else {
+                            LOGGER.warn("[ShinederuPingMod] ⚠️ Code HTTP " + code + " - Erreur retournée : " + message);
+                        }
+                    } catch (Exception e) {
+                        LOGGER.error("[ShinederuPingMod] ❌ Erreur lors de l’analyse du JSON : " + e.getMessage());
+                    }
+                } else {
+                    LOGGER.warn("[ShinederuPingMod] ❗ Réponse non-JSON ou inattendue : " + response);
+                }
+
+            } catch (SocketTimeoutException e) {
+                LOGGER.error("[ShinederuPingMod] ❌ Timeout lors de la tentative de ping !");
+            } catch (IOException e) {
+                LOGGER.error("[ShinederuPingMod] ❌ Erreur réseau : " + e.getMessage());
+            } catch (Exception e) {
+                LOGGER.error("[ShinederuPingMod] ❌ Erreur inconnue : ", e);
+            }
+        }).start();
     }
 }
